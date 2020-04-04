@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Diagnostics;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
@@ -12,21 +14,40 @@ using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Overlay;
 using Entrepreneur.Classes;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace Entrepreneur.Behaviours
 {
     class EntrepreneurCampaignBehaviour : CampaignBehaviorBase
     {
         Dictionary<string, AcreProperties> acrePropertiesMap = new Dictionary<string, AcreProperties>();
+        string serializedAcrePropertiesMap = "NOT_SERIALIZED";
+        Dictionary<string, string> testDictionary = new Dictionary<string, string>();
         public override void RegisterEvents()
         {
             CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
             CampaignEvents.WeeklyTickEvent.AddNonSerializedListener(this,this.generateRevenue);
             
         }
+
         public override void SyncData(IDataStore dataStore)
         {
-            
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            if (dataStore.IsLoading) {
+                dataStore.SyncData<string>("serializedAcrePropertiesMap", ref serializedAcrePropertiesMap);
+                byte[] bytes = Convert.FromBase64String(serializedAcrePropertiesMap);
+                Stream stream = new MemoryStream(bytes);
+                acrePropertiesMap = (Dictionary<string, AcreProperties>) binaryFormatter.Deserialize(stream);
+            }
+            if (dataStore.IsSaving)
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                binaryFormatter.Serialize(memoryStream, acrePropertiesMap);
+                string value = Convert.ToBase64String(memoryStream.ToArray());
+                serializedAcrePropertiesMap = value;
+                dataStore.SyncData<string>("serializedAcrePropertiesMap", ref serializedAcrePropertiesMap);
+            }
         }
         private void OnSessionLaunched(CampaignGameStarter obj)
         {
@@ -115,15 +136,18 @@ namespace Entrepreneur.Behaviours
         }
         private void populateSettlementsWithProperty()
         {
-            Random random = new Random();
-            foreach (Settlement settlement in Settlement.All)
+            if(acrePropertiesMap.Count == 0)
             {
-                if (settlement.IsVillage)
+                Random random = new Random();
+                foreach (Settlement settlement in Settlement.All)
                 {
-                    int availableAcres = random.Next(10, 100);
-                    int takenAcres = random.Next(5, availableAcres - (availableAcres / 2));
-                    string settlementID = settlement.StringId;
-                    acrePropertiesMap.Add(settlementID, new AcreProperties(settlementID, availableAcres, takenAcres));
+                    if (settlement.IsVillage)
+                    {
+                        int availableAcres = random.Next(10, 100);
+                        int takenAcres = random.Next(5, availableAcres - (availableAcres / 2));
+                        string settlementID = settlement.StringId;
+                        acrePropertiesMap.Add(settlementID, new AcreProperties(settlementID, availableAcres, takenAcres));
+                    }
                 }
             }
         }

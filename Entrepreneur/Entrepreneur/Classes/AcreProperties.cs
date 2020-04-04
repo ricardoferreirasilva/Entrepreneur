@@ -11,9 +11,10 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Overlay;
-
+using TaleWorlds.SaveSystem;
 namespace Entrepreneur.Classes
 {
+    [Serializable]
     public class AcreProperties
     {
         public int totalAcres;
