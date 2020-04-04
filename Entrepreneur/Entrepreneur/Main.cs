@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
@@ -19,14 +20,12 @@ namespace Entrepreneur
         protected override void OnSubModuleLoad()
         {
         }
-        public override void OnGameLoaded(Game game, object initializerObject)
+        protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
         {
             Campaign campaign = game.GameType as Campaign;
-            if (campaign != null)
-            {
-                CampaignGameStarter gameInitializer = (CampaignGameStarter)initializerObject;
-                AddBehaviors(gameInitializer);
-            }
+            if (campaign == null) return;
+            CampaignGameStarter gameInitializer = (CampaignGameStarter)gameStarterObject;
+            AddBehaviors(gameInitializer);
         }
 
         private void AddBehaviors(CampaignGameStarter gameInitializer)

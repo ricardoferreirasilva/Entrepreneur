@@ -51,6 +51,7 @@ namespace Entrepreneur.Behaviours
         }
         private void OnSessionLaunched(CampaignGameStarter obj)
         {
+            InformationManager.DisplayMessage(new InformationMessage("Entrepreneur loaded."));
             populateSettlementsWithProperty();
             createEntrepeneurVillageMenus(obj);
         }
