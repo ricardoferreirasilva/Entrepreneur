@@ -16,6 +16,7 @@ using TaleWorlds.CampaignSystem.Overlay;
 using Entrepreneur.Classes;
 using System.IO;
 using System.Xml.Serialization;
+using TaleWorlds.SaveSystem;
 
 namespace Entrepreneur.Behaviours
 {
@@ -33,21 +34,7 @@ namespace Entrepreneur.Behaviours
 
         public override void SyncData(IDataStore dataStore)
         {
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            if (dataStore.IsLoading) {
-                dataStore.SyncData<string>("serializedAcrePropertiesMap", ref serializedAcrePropertiesMap);
-                byte[] bytes = Convert.FromBase64String(serializedAcrePropertiesMap);
-                Stream stream = new MemoryStream(bytes);
-                acrePropertiesMap = (Dictionary<string, AcreProperties>) binaryFormatter.Deserialize(stream);
-            }
-            if (dataStore.IsSaving)
-            {
-                MemoryStream memoryStream = new MemoryStream();
-                binaryFormatter.Serialize(memoryStream, acrePropertiesMap);
-                string value = Convert.ToBase64String(memoryStream.ToArray());
-                serializedAcrePropertiesMap = value;
-                dataStore.SyncData<string>("serializedAcrePropertiesMap", ref serializedAcrePropertiesMap);
-            }
+            dataStore.SyncData("acrePropertiesMap", ref acrePropertiesMap);
         }
         private void OnSessionLaunched(CampaignGameStarter obj)
         {
@@ -169,5 +156,22 @@ namespace Entrepreneur.Behaviours
             InformationManager.DisplayMessage(new InformationMessage("Your land, properties and rents have generated " + totalIncome + " worth of income this week."));
 
         }
+        public class MySaveDefiner : SaveableTypeDefiner
+        {
+            public MySaveDefiner() : base(10000001)
+            {
+            }
+
+            protected override void DefineClassTypes()
+            {
+                AddClassDefinition(typeof(AcreProperties), 1);
+            }
+
+            protected override void DefineContainerDefinitions()
+            {
+                ConstructContainerDefinition(typeof(Dictionary<string, AcreProperties>));
+            }
+        }
+
     }
 }

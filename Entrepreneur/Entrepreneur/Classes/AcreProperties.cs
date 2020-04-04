@@ -14,12 +14,15 @@ using TaleWorlds.CampaignSystem.Overlay;
 using TaleWorlds.SaveSystem;
 namespace Entrepreneur.Classes
 {
-    [Serializable]
     public class AcreProperties
     {
+        [SaveableField(1)]
         public int totalAcres;
+        [SaveableField(2)]
         public int takenAcres;
+        [SaveableField(3)]
         public int playerAcres = 0;
+        [SaveableField(4)]
         public string settlementID;
         public AcreProperties(string settlementID, int totalAcres, int takenAcres)
         {
