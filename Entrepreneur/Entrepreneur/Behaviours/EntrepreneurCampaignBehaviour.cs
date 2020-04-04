@@ -23,7 +23,6 @@ namespace Entrepreneur.Behaviours
     class EntrepreneurCampaignBehaviour : CampaignBehaviorBase
     {
         Dictionary<string, AcreProperties> acrePropertiesMap = new Dictionary<string, AcreProperties>();
-        string serializedAcrePropertiesMap = "NOT_SERIALIZED";
         Dictionary<string, string> testDictionary = new Dictionary<string, string>();
         public override void RegisterEvents()
         {
