@@ -11,7 +11,10 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Overlay;
+using TaleWorlds.CampaignSystem.Character;
 using TaleWorlds.SaveSystem;
+using static TaleWorlds.CampaignSystem.SettlementComponent;
+
 namespace Entrepreneur.Classes
 {
     public class AcreProperties
@@ -40,24 +43,64 @@ namespace Entrepreneur.Classes
         {
             get {
                 double availability = ((double)(this.playerAcres + this.takenAcres) / (double)this.totalAcres);
+
+                // Base price of acre based on availability
                 double availabilityYield = availability * 1500 + 500;
-                int pricePerAcre = Convert.ToInt32(availabilityYield + this.ProductionValue * 3);
+
+                int pricePerAcre = Convert.ToInt32(availabilityYield + this.ProductionValue * 12);
+
                 return pricePerAcre;
             }
         }
         public int ProductionValue
         {
             get {
+                int workerWage = 2;
                 Settlement settlement = this.getSelf();
                 var products = settlement.Village.VillageType.Productions;
                 int totalProductionValue = 0;
+
                 foreach (var (item, amount) in products)
                 {
-                    totalProductionValue += (int)amount * item.Value;
+                    totalProductionValue += (int)amount * item.Value - ((int)amount * workerWage);
+                }
+
+                //If village is deserted, production is 30%.
+                if (settlement.IsRebelling || settlement.IsStarving)
+                {
+                    totalProductionValue = (int)(totalProductionValue * 0.5d);
+                }
+
+                //If village is deserted, production is 10%.
+                if (settlement.Village.IsDeserted)
+                {
+                    totalProductionValue = (int) (totalProductionValue * 0.1d);
+                }
+
+                // If settlement is raided then its not producing.
+                if (settlement.IsRaided || settlement.IsUnderRaid || settlement.IsUnderSiege)
+                {
+                    totalProductionValue = 0;
                 }
                 return totalProductionValue;
             }
         }
+        public float RelationWithPlayer{
+            get{
+                Settlement settlement = this.getSelf();
+                var heroes = settlement.HeroesWithoutParty;
+                var relations = new List<float>();
+                foreach (var hero in heroes)
+                {
+                    float relationWithPlayer = hero.GetRelationWithPlayer();
+                    relations.Add(relationWithPlayer);
+                }
+                relations.Average();
+                if (relations.Count > 0) return relations.Average();
+                else return 0f;
+            }
+        }
+
         public int AvailableAcres
         {
             get
