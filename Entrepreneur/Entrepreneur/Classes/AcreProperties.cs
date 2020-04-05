@@ -47,7 +47,7 @@ namespace Entrepreneur.Classes
                 // Base price of acre based on availability
                 double availabilityYield = availability * 1500 + 500;
 
-                int pricePerAcre = Convert.ToInt32(availabilityYield + this.ProductionValue * 12);
+                int pricePerAcre = Convert.ToInt32(availabilityYield + this.ProductionValue * 20);
 
                 return pricePerAcre;
             }
@@ -55,15 +55,17 @@ namespace Entrepreneur.Classes
         public int ProductionValue
         {
             get {
+                double valueReducer = 7;
                 int workerWage = 2;
                 Settlement settlement = this.getSelf();
                 var products = settlement.Village.VillageType.Productions;
                 int totalProductionValue = 0;
-
+                float prosperity = settlement.Village.Bound.Prosperity;
                 foreach (var (item, amount) in products)
                 {
                     totalProductionValue += (int)amount * item.Value - ((int)amount * workerWage);
                 }
+                totalProductionValue = (int)(totalProductionValue / valueReducer);
 
                 //If village is deserted, production is 30%.
                 if (settlement.IsRebelling || settlement.IsStarving)
@@ -108,20 +110,76 @@ namespace Entrepreneur.Classes
                 return (this.totalAcres - (this.playerAcres + this.takenAcres));
             }
         }
+
+        // Percentage used for buying from the player. Higher percentage, player receives less.
         private double AcreBuyPercentage
         {
             get
             {
-                double points = 10;
+                double points = 25;
+                float relation = this.RelationWithPlayer;
+                Settlement settlement = this.getSelf();
+                if (relation > 20)
+                {
+                    points -= 5;
+                }
+                if (relation < 0)
+                {
+                    points += 5;
+                }
+                //If village is rebelling or starving, buy percentage increases by 10.
+                if (settlement.IsRebelling || settlement.IsStarving)
+                {
+                    points += 10;
+                }
+
+                //If village is deserted, buy percentage increases by 10.
+                if (settlement.Village.IsDeserted)
+                {
+                    points += 10;
+                }
+
+                //If village is raided, buy percentage increases by 50.
+                if (settlement.IsRaided || settlement.IsUnderRaid || settlement.IsUnderSiege)
+                {
+                    points += 50;
+                }
                 return (points / (double) 100);
             }
         }
+        // Percentage used for selling to the player. Higher percentage, player pays more.
         private double AcreSellPercentage
         {
             get
             {
-                double points = 10;
-                return (points / (double) 100);
+                double points = 25;
+                float relation = this.RelationWithPlayer;
+                Settlement settlement = this.getSelf();
+                if(relation > 20)
+                {
+                    points -= 5;
+                }
+                if (relation < 0)
+                {
+                    points += 5;
+                }
+                //If village is rebelling or starving, buy percentage increases by 10.
+                if (settlement.IsRebelling || settlement.IsStarving)
+                {
+                    points -= 5;
+                }
+
+                //If village is deserted, buy percentage increases by 10.
+                if (settlement.Village.IsDeserted)
+                {
+                    points -= 10;
+                }
+                //If village is raided, buy percentage increases by 50.
+                if (settlement.IsRaided || settlement.IsUnderRaid || settlement.IsUnderSiege)
+                {
+                    points -= 20;
+                }
+                return (points / (double)100);
             }
         }
         // Price that the village uses to buy acres from the player.
