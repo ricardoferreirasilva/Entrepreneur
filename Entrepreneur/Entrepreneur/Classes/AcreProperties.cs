@@ -39,6 +39,14 @@ namespace Entrepreneur.Classes
             return Settlement.Find(this.settlementID);
         }
 
+        public Settlement Settlement
+        {
+            get
+            {
+                return Settlement.Find(this.settlementID);
+            }
+        }
+
         public int PricePerAcre
         {
             get {
@@ -112,7 +120,7 @@ namespace Entrepreneur.Classes
         }
 
         // Percentage used for buying from the player. Higher percentage, player receives less.
-        private double AcreBuyPercentage
+        public double AcreBuyPercentage
         {
             get
             {
@@ -148,7 +156,7 @@ namespace Entrepreneur.Classes
             }
         }
         // Percentage used for selling to the player. Higher percentage, player pays more.
-        private double AcreSellPercentage
+        public double AcreSellPercentage
         {
             get
             {
