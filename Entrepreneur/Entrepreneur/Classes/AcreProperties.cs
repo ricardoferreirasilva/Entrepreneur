@@ -63,7 +63,7 @@ namespace Entrepreneur.Classes
         public int ProductionValue
         {
             get {
-                double valueReducer = 7;
+                double valueReducer = 4;
                 int workerWage = 2;
                 Settlement settlement = this.getSelf();
                 var products = settlement.Village.VillageType.Productions;
@@ -73,7 +73,7 @@ namespace Entrepreneur.Classes
                 {
                     totalProductionValue += (int)amount * item.Value - ((int)amount * workerWage);
                 }
-                totalProductionValue = (int)(totalProductionValue / valueReducer);
+                totalProductionValue = (int)((totalProductionValue / 7) * valueReducer);
 
                 //If village is deserted, production is 30%.
                 if (settlement.IsRebelling || settlement.IsStarving)
@@ -116,6 +116,13 @@ namespace Entrepreneur.Classes
             get
             {
                 return (this.totalAcres - (this.playerAcres + this.takenAcres));
+            }
+        }
+        public int VillagePlayerRevenue
+        {
+            get
+            {
+                return (this.playerAcres * this.ProductionValue);
             }
         }
 

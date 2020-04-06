@@ -49,7 +49,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"One acre of land costs {this._acreProperties.PricePerAcre}.";
+				return $"One acre of land is worth {this._acreProperties.PricePerAcre}.";
 			}
 		}
 		[DataSourceProperty]
@@ -73,7 +73,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"Sell margin = +{(int)(this._acreProperties.AcreBuyPercentage * 100)}%";
+				return $"Buy margin = +{(int)(this._acreProperties.AcreBuyPercentage * 100)}%";
 			}
 		}
 		[DataSourceProperty]
@@ -100,6 +100,15 @@ namespace Entrepreneur.Screens.ViewModels
 			get
 			{
 				return $"Sell for {this._acreProperties.AcreBuyPrice}";
+			}
+		}
+
+		[DataSourceProperty]
+		public string TotalRevenueDescription
+		{
+			get
+			{
+				return $"Total daily player revenue = {this._acreProperties.VillagePlayerRevenue}";
 			}
 		}
 
@@ -150,6 +159,7 @@ namespace Entrepreneur.Screens.ViewModels
 			OnPropertyChanged("RelationsDescription");
 			OnPropertyChanged("SellMarginDescription");
 			OnPropertyChanged("BuyMarginDescription");
+			OnPropertyChanged("TotalRevenueDescription");
 		}
 	}
 }

@@ -27,7 +27,7 @@ namespace Entrepreneur.Behaviours
         public override void RegisterEvents()
         {
             CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
-            CampaignEvents.WeeklyTickEvent.AddNonSerializedListener(this,this.generateRevenue);
+            CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, this.generateRevenue);
         }
 
         public override void SyncData(IDataStore dataStore)
