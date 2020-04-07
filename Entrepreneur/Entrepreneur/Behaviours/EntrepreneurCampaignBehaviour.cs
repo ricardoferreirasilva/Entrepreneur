@@ -17,23 +17,51 @@ using Entrepreneur.Classes;
 using TaleWorlds.SaveSystem;
 using TaleWorlds.Engine.Screens;
 using Entrepreneur.Screens;
+using TaleWorlds.MountAndBlade.ViewModelCollection.Multiplayer.HUDExtensions;
+using TaleWorlds.CampaignSystem.ViewModelCollection.GameMenu;
+using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Map.Siege;
 
 namespace Entrepreneur.Behaviours
 {
     class EntrepreneurCampaignBehaviour : CampaignBehaviorBase
     {
         Dictionary<string, AcreProperties> acrePropertiesMap = new Dictionary<string, AcreProperties>();
-        Dictionary<string, string> testDictionary = new Dictionary<string, string>();
         public override void RegisterEvents()
         {
             CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
             CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, this.generateRevenue);
+            CampaignEvents.RaidCompletedEvent.AddNonSerializedListener(this, new Action<BattleSideEnum, MapEvent>(this.OnRaidCompleted));
         }
 
         public override void SyncData(IDataStore dataStore)
         {
             dataStore.SyncData("acrePropertiesMap", ref acrePropertiesMap);
             
+        }
+        private void OnRaidCompleted(BattleSideEnum battle, MapEvent mapEvent){
+            if (mapEvent.IsRaid)
+            {
+                Settlement settlement = mapEvent.MapEventSettlement;
+                if (settlement.IsVillage)
+                {
+                    AcreProperties settlementAcreProperties;
+                    this.acrePropertiesMap.TryGetValue(settlement.StringId, out settlementAcreProperties);
+                    if(settlementAcreProperties.playerAcres > 0)
+                    {
+                        Random rand = new Random();
+                        if (rand.Next(1, 101) <= 25)
+                        {
+                            settlementAcreProperties.playerAcres--;
+                            InformationManager.DisplayMessage(new InformationMessage($"The village of {mapEvent.MapEventSettlement.Name} was raided and one of your properties was destroyed."));
+                        }
+                        else
+                        {
+                            InformationManager.DisplayMessage(new InformationMessage($"The village of {mapEvent.MapEventSettlement.Name} was raided but none of your property was destroyed."));
+                        }
+                    }
+  
+                }
+            }
         }
         private void OnSessionLaunched(CampaignGameStarter obj)
         {
@@ -84,18 +112,18 @@ namespace Entrepreneur.Behaviours
                 }
             }
             Hero.MainHero.ChangeHeroGold(totalIncome);
-            InformationManager.DisplayMessage(new InformationMessage("Your land, properties and rents have generated " + totalIncome + " worth of income this week."));
+            InformationManager.DisplayMessage(new InformationMessage("Your land, properties and rents have generated " + totalIncome + " worth of income today."));
 
         }
         public class MySaveDefiner : SaveableTypeDefiner
         {
-            public MySaveDefiner() : base(10000001)
+            public MySaveDefiner() : base(52357711)
             {
             }
 
             protected override void DefineClassTypes()
             {
-                AddClassDefinition(typeof(AcreProperties), 1);
+                AddClassDefinition(typeof(AcreProperties), 52357712);
             }
 
             protected override void DefineContainerDefinitions()

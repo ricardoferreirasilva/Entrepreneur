@@ -7,17 +7,16 @@ using TaleWorlds.Engine;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.GauntletUI;
 using TaleWorlds.InputSystem;
-using TaleWorlds.Library;
-using TaleWorlds.MountAndBlade;
-using TaleWorlds.Localization;
 using TaleWorlds.Engine.GauntletUI;
 using TaleWorlds.GauntletUI.Data;
 using Entrepreneur.Screens.ViewModels;
 using Entrepreneur.Classes;
+using TaleWorlds.MountAndBlade.View.Missions;
+using TaleWorlds.CampaignSystem.ViewModelCollection.GameMenu;
 
 namespace Entrepreneur.Screens
 {
-    class VillagePropertyScreen : ScreenBase
+	class VillagePropertyScreen : ScreenBase
     {
 		private AcreProperties _acreProperties;
 

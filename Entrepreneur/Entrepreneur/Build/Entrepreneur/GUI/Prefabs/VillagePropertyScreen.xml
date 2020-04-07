@@ -23,8 +23,26 @@
                     <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginTop="140" MarginLeft="0" Text="@RelationsDescription" Brush="CenterAlignedSmallFont"/>
                     <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginTop="160" MarginLeft="0" Text="@SellMarginDescription" Brush="CenterAlignedSmallFont"/>
                     <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginTop="180" MarginLeft="0" Text="@BuyMarginDescription" Brush="CenterAlignedSmallFont"/>
-					 <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginTop="200" MarginLeft="0" Text="@TotalRevenueDescription" Brush="CenterAlignedSmallFont"/>
-                  </Children>
+					<RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginTop="200" MarginLeft="0" Text="@TotalRevenueDescription" Brush="CenterAlignedSmallFont"/>
+
+
+					  <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginTop="400" MarginLeft="0" Text="Player Gold" Brush="CenterAlignedMediumFont"/>
+					
+					  <!--Total Wealth-->
+					<Widget DoNotPassEventsToChildren="true" WidthSizePolicy = "StretchToParent" HeightSizePolicy = "CoverChildren" VerticalAlignment="Bottom" MarginBottom="15">
+						<Children>
+							<ListPanel DoNotPassEventsToChildren="true" WidthSizePolicy = "CoverChildren" HeightSizePolicy = "CoverChildren" HorizontalAlignment="Center">
+								<Children>
+									<!--Coin Icon-->
+									<Widget WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedHeight="30" SuggestedWidth="30" Sprite="Icons\Coin@2x" PositionYOffset="2" HorizontalAlignment="Center"/>
+									<!--Total Wealth Text-->
+									<TextWidget WidthSizePolicy = "CoverChildren" HeightSizePolicy = "CoverChildren" IntText="@PlayerGold" Brush="Recruitment.Info.Text" Brush.FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Bottom" PositionYOffset="3" Brush.TextVerticalAlignment="Center" Brush.FontColor="#DCAE4BFF" />
+									
+								</Children>
+							</ListPanel>
+						</Children>
+					</Widget>                    
+				  </Children>
                 </Widget>
                   <Widget WidthSizePolicy = "Fixed" HeightSiz2ePolicy = "Fixed" SuggestedWidth="850" SuggestedHeight="500" MarginTop="140" MarginLeft="0">
                   <Children>

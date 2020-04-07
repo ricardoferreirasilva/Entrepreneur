@@ -10,7 +10,6 @@ using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
-
 namespace Entrepreneur.Screens.ViewModels
 {
     class VillagePropertyMenuViewModel : ViewModel
@@ -57,7 +56,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"One acre of land produces {this._acreProperties.ProductionValue}.";
+				return $"One acre of land produces {this._acreProperties.ProductionValue} per day.";
 			}
 		}
 		[DataSourceProperty]
@@ -108,7 +107,16 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"Total daily player revenue = {this._acreProperties.VillagePlayerRevenue}";
+				return $"Total daily player revenue here = {this._acreProperties.VillagePlayerRevenue}";
+			}
+		}
+
+		[DataSourceProperty]
+		public int PlayerGold
+		{
+			get
+			{
+				return Hero.MainHero.Gold;
 			}
 		}
 
@@ -160,6 +168,7 @@ namespace Entrepreneur.Screens.ViewModels
 			OnPropertyChanged("SellMarginDescription");
 			OnPropertyChanged("BuyMarginDescription");
 			OnPropertyChanged("TotalRevenueDescription");
+			OnPropertyChanged("PlayerGold");
 		}
 	}
 }

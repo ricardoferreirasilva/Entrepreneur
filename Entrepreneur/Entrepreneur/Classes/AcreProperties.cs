@@ -52,10 +52,8 @@ namespace Entrepreneur.Classes
             get {
                 double availability = ((double)(this.playerAcres + this.takenAcres) / (double)this.totalAcres);
 
-                // Base price of acre based on availability
-                double availabilityYield = availability * 1500 + 500;
 
-                int pricePerAcre = Convert.ToInt32(availabilityYield + this.ProductionValue * 20);
+                int pricePerAcre = Convert.ToInt32(this.ProductionValue * 30 + availability * this.ProductionValue * 30);
 
                 return pricePerAcre;
             }
@@ -63,17 +61,16 @@ namespace Entrepreneur.Classes
         public int ProductionValue
         {
             get {
-                double valueReducer = 4;
-                int workerWage = 2;
+                double valueReducer = 3;
                 Settlement settlement = this.getSelf();
                 var products = settlement.Village.VillageType.Productions;
                 int totalProductionValue = 0;
                 float prosperity = settlement.Village.Bound.Prosperity;
                 foreach (var (item, amount) in products)
                 {
-                    totalProductionValue += (int)amount * item.Value - ((int)amount * workerWage);
+                    totalProductionValue += (int) amount * item.Value;
                 }
-                totalProductionValue = (int)((totalProductionValue / 7) * valueReducer);
+                totalProductionValue = (int)((totalProductionValue / 7) / valueReducer);
 
                 //If village is deserted, production is 30%.
                 if (settlement.IsRebelling || settlement.IsStarving)
