@@ -11,7 +11,6 @@ using TaleWorlds.Engine.GauntletUI;
 using TaleWorlds.GauntletUI.Data;
 using Entrepreneur.Screens.ViewModels;
 using Entrepreneur.Classes;
-using TaleWorlds.MountAndBlade.View.Missions;
 using TaleWorlds.CampaignSystem.ViewModelCollection.GameMenu;
 
 namespace Entrepreneur.Screens
@@ -48,19 +47,6 @@ namespace Entrepreneur.Screens
 		protected override void OnFrameTick(float dt)
 		{
 			base.OnFrameTick(dt);
-			InputContext input = _gauntletLayer.Input;
-			if (_firstRender)
-			{
-			}
-			if (input.IsKeyReleased(InputKey.Escape))
-			{
-				ScreenManager.PopScreen();
-			}
-			else if (input.IsKeyPressed(InputKey.F5))
-			{
-				_movie.WidgetFactory.CheckForUpdates();
-				_movie = _gauntletLayer.LoadMovie("VillagePropertyScreen", _datasource);
-			}
 		}
 	}
 }

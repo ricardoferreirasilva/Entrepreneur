@@ -12,13 +12,20 @@ using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Overlay;
 using Entrepreneur.Behaviours;
+using HarmonyLib;
 
 namespace Entrepreneur
 {
     public class Main : MBSubModuleBase
     {
+
         protected override void OnSubModuleLoad()
         {
+            Harmony.DEBUG = true;
+            Harmony harmony = new Harmony("com.goog.bannerlordmods.Entrepreneur");
+            harmony.PatchAll();
+            base.OnSubModuleLoad();
+
         }
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
         {
@@ -30,7 +37,7 @@ namespace Entrepreneur
 
         private void AddBehaviors(CampaignGameStarter gameInitializer)
         {
-            gameInitializer.AddBehavior(new EntrepreneurCampaignBehaviour());
+            gameInitializer.AddBehavior(EntrepreneurCampaignBehaviour.Instance);
         }
     }
 }

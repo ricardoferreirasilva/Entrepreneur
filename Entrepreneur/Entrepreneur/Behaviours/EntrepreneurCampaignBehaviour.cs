@@ -26,6 +26,7 @@ namespace Entrepreneur.Behaviours
     class EntrepreneurCampaignBehaviour : CampaignBehaviorBase
     {
         Dictionary<string, AcreProperties> acrePropertiesMap = new Dictionary<string, AcreProperties>();
+        public static readonly EntrepreneurCampaignBehaviour Instance = new EntrepreneurCampaignBehaviour();
         public override void RegisterEvents()
         {
             CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
@@ -98,22 +99,39 @@ namespace Entrepreneur.Behaviours
                 }
             }
         }
-
+        public int TotalPlayerRevenue
+        {
+            get
+            {
+                int totalIncome = 0;
+                foreach (Settlement settlement in Settlement.All)
+                {
+                    if (settlement.IsVillage)
+                    {
+                        AcreProperties settlementAcreProperties;
+                        this.acrePropertiesMap.TryGetValue(settlement.StringId, out settlementAcreProperties);
+                        totalIncome += settlementAcreProperties.playerAcres * settlementAcreProperties.ProductionValue;
+                    }
+                }
+                return totalIncome;
+            }
+        }
         private void generateRevenue()
         {
-            int totalIncome = 0;
-            foreach (Settlement settlement in Settlement.All)
-            {
-                if (settlement.IsVillage)
-                {
-                    AcreProperties settlementAcreProperties;
-                    this.acrePropertiesMap.TryGetValue(settlement.StringId, out settlementAcreProperties);
-                    totalIncome += settlementAcreProperties.playerAcres * settlementAcreProperties.ProductionValue;
-                }
-            }
-            Hero.MainHero.ChangeHeroGold(totalIncome);
-            InformationManager.DisplayMessage(new InformationMessage("Your land, properties and rents have generated " + totalIncome + " worth of income today."));
-
+            Hero.MainHero.ChangeHeroGold(this.TotalPlayerRevenue);
+            InformationManager.DisplayMessage(new InformationMessage("Your land, properties and rents have generated " + this.TotalPlayerRevenue + " worth of income today."));
+        }
+        public int GetVillagePlayerAcres(string stringId)
+        {
+            AcreProperties settlementAcreProperties;
+            this.acrePropertiesMap.TryGetValue(stringId, out settlementAcreProperties);
+            return settlementAcreProperties.playerAcres;
+        }
+        public int GetVillagePlayerRevenue(string stringId)
+        {
+            AcreProperties settlementAcreProperties;
+            this.acrePropertiesMap.TryGetValue(stringId, out settlementAcreProperties);
+            return settlementAcreProperties.VillagePlayerRevenue;
         }
         public class MySaveDefiner : SaveableTypeDefiner
         {
