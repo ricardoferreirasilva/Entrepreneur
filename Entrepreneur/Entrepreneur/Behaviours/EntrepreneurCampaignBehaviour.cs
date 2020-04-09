@@ -30,7 +30,6 @@ namespace Entrepreneur.Behaviours
         public override void RegisterEvents()
         {
             CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
-            CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, this.generateRevenue);
             CampaignEvents.RaidCompletedEvent.AddNonSerializedListener(this, new Action<BattleSideEnum, MapEvent>(this.OnRaidCompleted));
         }
 
