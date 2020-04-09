@@ -77,21 +77,6 @@ namespace Entrepreneur.Patches
             TooltipProperty topTooltipProperty = tooltipPropertyList[0];
             if(topTooltipProperty.DefinitionLabel.Equals("Current Denars"))
             {
-                CurrentDenarsTooltipPostfix(__instance, tooltipPropertyList);
-            }
-        }
-        private static void CurrentDenarsTooltipPostfix(TooltipVM __instance, List<TooltipProperty> tooltipPropertyList)
-        {
-            int totalProperties = __instance.TooltipPropertyList.Count;
-            if(EntrepreneurCampaignBehaviour.Instance.TotalPlayerRevenue > 0)
-            {
-                string acresRevenue = "+" + EntrepreneurCampaignBehaviour.Instance.TotalPlayerRevenue;
-                __instance.TooltipPropertyList.Insert(totalProperties - 2, new TooltipProperty("Revenue from acres", acresRevenue, 0, false, TooltipProperty.TooltipPropertyFlags.None));
-                string currentDailyChange = __instance.TooltipPropertyList.Last().ValueLabel;
-                int currentDailyChangeInt = Int32.Parse(currentDailyChange);
-                int newDailyChange = currentDailyChangeInt + EntrepreneurCampaignBehaviour.Instance.TotalPlayerRevenue;
-                if (newDailyChange > 0) __instance.TooltipPropertyList.Last().ValueLabel = "+" + newDailyChange;
-                else __instance.TooltipPropertyList.Last().ValueLabel = newDailyChange.ToString();
             }
         }
     }

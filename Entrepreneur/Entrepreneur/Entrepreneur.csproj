@@ -204,7 +204,8 @@
     <Compile Include="Classes\AcreProperties.cs" />
     <Compile Include="Behaviours\EntrepreneurCampaignBehaviour.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="Patches\ClanVMPatch.cs" />
+    <Compile Include="Models\EntrepreneurClanFinanceModel.cs" />
+    <Compile Include="Patches\ClanFinancialModelCalculateIncomePatch.cs" />
     <Compile Include="Patches\TooltipVMPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\ViewModels\VillagePropertyMenuViewModel.cs" />
