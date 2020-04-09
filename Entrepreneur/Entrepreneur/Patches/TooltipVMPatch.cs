@@ -22,19 +22,29 @@ namespace Entrepreneur.Patches
         [HarmonyPostfix]
         private static void UpdateTooltipPostfix(TooltipVM __instance, Type type, object[] args)
         {
-            if (type.ToString().Equals("TaleWorlds.CampaignSystem.PartyBase"))
+            try
             {
-                int partyID = (int)args[0];
-                int unknown_1 = (int)args[1];
-                Boolean unkown_2 = (Boolean)args[2];
-                PartyTooltipPostfix(__instance, partyID);
+                if (type.ToString().Equals("TaleWorlds.CampaignSystem.PartyBase"))
+                {
+                    int partyID = (int)args[0];
+                    int unknown_1 = (int)args[1];
+                    Boolean unkown_2 = (Boolean)args[2];
+                    PartyTooltipPostfix(__instance, partyID);
 
+                }
+                else if (type.ToString().Equals("System.Collections.Generic.List`1[TaleWorlds.Core.ViewModelCollection.TooltipProperty]"))
+                {
+                    List<TooltipProperty> list = (List<TooltipProperty>)args[0];
+                    InterfaceTooltipPostfix(__instance, list);
+                }
             }
-            else if (type.ToString().Equals("System.Collections.Generic.List`1[TaleWorlds.Core.ViewModelCollection.TooltipProperty]"))
+            catch (Exception ex)
             {
-                List<TooltipProperty> list = (List<TooltipProperty>)args[0];
-                InterfaceTooltipPostfix(__instance, list);
+                Trace.WriteLine(ex.Message);
+                Trace.WriteLine(ex.StackTrace);
+                
             }
+
         }
         private static void PartyTooltipPostfix(TooltipVM __instance, int partyID)
         {
