@@ -15,6 +15,7 @@ using Entrepreneur.Behaviours;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
 using Entrepreneur.Models;
+using Entrepreneur.Resources;
 
 namespace Entrepreneur
 {
@@ -23,7 +24,8 @@ namespace Entrepreneur
 
         protected override void OnSubModuleLoad()
         {
-            Harmony.DEBUG = true;
+			ResourceLoader.Load();
+            Harmony.DEBUG = false;
             Harmony harmony = new Harmony("com.goog.bannerlordmods.Entrepreneur");
             harmony.PatchAll();
             base.OnSubModuleLoad();

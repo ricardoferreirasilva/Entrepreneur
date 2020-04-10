@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SpriteData>
+	<SpriteCategories>
+		<SpriteCategory>
+			<Name>entrepreneur_icons</Name>
+			<SpriteSheetCount>1</SpriteSheetCount>
+			<SpriteSheetSize ID="1" Width="678" Height="770" />
+		</SpriteCategory>
+	</SpriteCategories>
+	<SpriteParts>
+		<SpritePart>
+			<SheetID>1</SheetID>
+			<Name>FinancesIcon</Name>
+			<Width>44</Width>
+			<Height>42</Height>
+			<SheetX>633</SheetX>
+			<SheetY>0</SheetY>
+			<CategoryName>entrepreneur_icons</CategoryName>
+		</SpritePart>
+		<SpritePart>
+			<SheetID>1</SheetID>
+			<Name>MapbarLeftFrame</Name>
+			<Width>632</Width>
+			<Height>77</Height>
+			<SheetX>0</SheetX>
+			<SheetY>0</SheetY>
+			<CategoryName>entrepreneur_icons</CategoryName>
+		</SpritePart>
+	</SpriteParts>
+	<Sprites>
+		<GenericSprite>
+			<Name>FinancesIcon</Name>
+			<SpritePartName>FinancesIcon</SpritePartName>
+		</GenericSprite>
+		<GenericSprite>
+			<Name>MapbarLeftFrame</Name>
+			<SpritePartName>MapbarLeftFrame</SpritePartName>
+		</GenericSprite>
+	</Sprites>
+</SpriteData>

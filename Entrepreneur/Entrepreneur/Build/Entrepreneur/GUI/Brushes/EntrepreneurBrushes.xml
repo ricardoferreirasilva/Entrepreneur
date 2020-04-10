@@ -1,0 +1,46 @@
+﻿<Brushes>
+	<Brush Name="FinancesIcon">
+		<Layers>
+			<BrushLayer Name="Default" Sprite="FinancesIcon" IsHidden="true"/>
+		</Layers>
+		<Styles>
+			<Style Name="Default">
+				<BrushLayer Name="Default" ColorFactor="1.0" IsHidden="false"/>
+			</Style>
+			<Style Name="Hovered">
+				<BrushLayer Name="Default" ColorFactor="1.5" IsHidden="false"/>
+			</Style>
+			<Style Name="Pressed">
+				<BrushLayer Name="Default" ColorFactor="2.0" IsHidden="false"/>
+			</Style>
+		</Styles>
+	</Brush>
+	<Brush Name="Entrepreneur.MapBar.Frame">
+		<Layers>
+			<BrushLayer Name="Default" Sprite="MapbarLeftFrame" />
+		</Layers>
+		<Styles>
+			<Style Name="Default">
+				<BrushLayer Name="Default" AlphaFactor="0" />
+			</Style>
+			<Style Name="MapScreen">
+				<BrushLayer Name="Default" AlphaFactor="0" />
+			</Style>
+			<Style Name="InventoryGauntletScreen">
+				<BrushLayer Name="Default" AlphaFactor="0.2" />
+			</Style>
+			<Style Name="GauntletPartyScreen">
+				<BrushLayer Name="Default" AlphaFactor="0.2" />
+			</Style>
+			<Style Name="GauntletCharacterDeveloperScreen">
+				<BrushLayer Name="Default" AlphaFactor="0.2" />
+			</Style>
+			<Style Name="GauntletClanScreen">
+				<BrushLayer Name="Default" AlphaFactor="0.2" />
+			</Style>
+			<Style Name="GauntletQuestsScreen">
+				<BrushLayer Name="Default" AlphaFactor="0.3" />
+			</Style>
+		</Styles>
+	</Brush>
+</Brushes>
