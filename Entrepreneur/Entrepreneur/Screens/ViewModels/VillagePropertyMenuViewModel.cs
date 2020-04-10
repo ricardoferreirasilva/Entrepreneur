@@ -23,7 +23,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return "You arrive to the village of " + this._acreProperties.Settlement.Name + " and ask the local elders for investment opportunities.";
+				return "You arrive to the village of " + this._acreProperties.Settlement.Name + ".";
 			}
 		}
 
@@ -50,7 +50,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"One acre of land is worth {this._acreProperties.PricePerAcre}.";
+				return $"One plot of land is worth {this._acreProperties.PricePerAcre}.";
 			}
 		}
 		[DataSourceProperty]
@@ -58,7 +58,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"One acre of land produces {this._acreProperties.ProductionValue} per day.";
+				return $"One plot of land produces {this._acreProperties.ProductionValue} per day.";
 			}
 		}
 		[DataSourceProperty]
@@ -91,7 +91,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"Buy for {this._acreProperties.AcreSellPrice}";
+				return $"{this._acreProperties.AcreSellPrice}";
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"Sell for {this._acreProperties.AcreBuyPrice}";
+				return $"{this._acreProperties.AcreBuyPrice}";
 			}
 		}
 
@@ -123,12 +123,22 @@ namespace Entrepreneur.Screens.ViewModels
 		}
 
 		[DataSourceProperty]
-		public String AvailableAcres
+		public String AvailablePlots
 		{
 			get
 			{
 				int availableAcres = this._acreProperties.totalAcres - this._acreProperties.takenAcres + this._acreProperties.playerAcres;
-				return availableAcres.ToString();
+				return "Available plots: " + availableAcres.ToString();
+			}
+		}
+
+		[DataSourceProperty]
+		public String OwnedPlots
+		{
+			get
+			{
+				int ownedPlots = this._acreProperties.playerAcres;
+				return "Owned plots: " + ownedPlots.ToString();
 			}
 		}
 
@@ -151,20 +161,20 @@ namespace Entrepreneur.Screens.ViewModels
 					GiveGoldAction.ApplyForCharacterToSettlement(Hero.MainHero, Settlement.CurrentSettlement, buyPrice);
 					this.RefreshProperties();
 				}
-				else InformationManager.DisplayMessage(new InformationMessage("You dont have enouph denars to buy this acre."));
+				else InformationManager.DisplayMessage(new InformationMessage("You dont have enouph gold to buy this plot."));
 			}
-			else InformationManager.DisplayMessage(new InformationMessage("There are no available acres to buy."));
+			else InformationManager.DisplayMessage(new InformationMessage("There are no plots acres to buy."));
 		}
 		private void SellAcre()
 		{
-			int buyPrice = this._acreProperties.AcreSellPrice;
+			int sellPrice = this._acreProperties.AcreBuyPrice;
 			if (this._acreProperties.playerAcres > 0)
 			{
 				this._acreProperties.sellAcre();
-				GiveGoldAction.ApplyForSettlementToCharacter(Settlement.CurrentSettlement, Hero.MainHero, buyPrice);
+				GiveGoldAction.ApplyForSettlementToCharacter(Settlement.CurrentSettlement, Hero.MainHero, sellPrice);
 				this.RefreshProperties();
 			}
-			else InformationManager.DisplayMessage(new InformationMessage("You have no acres to sell."));
+			else InformationManager.DisplayMessage(new InformationMessage("You have no plots to sell."));
 		}
 
 		private void RefreshProperties()
@@ -181,6 +191,8 @@ namespace Entrepreneur.Screens.ViewModels
 			OnPropertyChanged("BuyMarginDescription");
 			OnPropertyChanged("TotalRevenueDescription");
 			OnPropertyChanged("PlayerGold");
+			OnPropertyChanged("AvailablePlots");
+			OnPropertyChanged("OwnedPlots");
 		}
 	}
 }

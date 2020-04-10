@@ -18,7 +18,7 @@
             <Children>
 					
 				<!--Player Acres Widget-->
-			    <Widget HorizontalAlignment="Left" MarginTop="140" MarginLeft="400" MarginRight="0">
+			    <Widget HorizontalAlignment="Left" MarginTop="140" MarginLeft="510" MarginRight="0">
 					<Children>
 						
 				        <Widget DoNotAcceptEvents="true" WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedWidth="200" SuggestedHeight="330" MarginTop="20" HorizontalAlignment="Left">
@@ -30,7 +30,7 @@
 								</Widget>
 								<Widget HorizontalAlignment="Center" VerticalAlignment="Bottom">
 									<Children>
-										<TextWidget Brush="MediumAlignedSmallFont" Text="Owned acres: 30" MarginTop="20"/>
+										<TextWidget Brush="MediumAlignedSmallFont" Text="@OwnedPlots" MarginTop="20"/>
 									</Children>
 								</Widget>
 					        </Children>
@@ -39,7 +39,7 @@
 				</Widget>
 
 				<!--Free Acres Widget-->
-				<Widget HorizontalAlignment="Left" MarginTop="140" MarginLeft="75">
+				<Widget HorizontalAlignment="Left" MarginTop="140" MarginLeft="180">
 					<Children>
 
 						<Widget DoNotAcceptEvents="true" WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedWidth="200" SuggestedHeight="330" MarginTop="20" HorizontalAlignment="Left">
@@ -51,7 +51,7 @@
 								</Widget>
 								<Widget HorizontalAlignment="Center" VerticalAlignment="Bottom">
 									<Children>
-										<TextWidget Brush="MediumAlignedSmallFont" Text="Available acres: 15" MarginTop="20"/>
+										<TextWidget Brush="MediumAlignedSmallFont" Text="@AvailablePlots" MarginTop="20"/>
 									</Children>
 								</Widget>
 							</Children>
@@ -93,19 +93,31 @@
                 </Widget>
                   <Widget WidthSizePolicy = "Fixed" HeightSiz2ePolicy = "Fixed" SuggestedWidth="850" SuggestedHeight="500" MarginTop="0" MarginLeft="0">
                   <Children>
-                    <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginLeft="30" MarginTop="20" Text="You arrive to the village of Danara." Brush="CenterAlignedMediumFont"/>
+                    <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginLeft="30" MarginTop="20" Text="@VillageDescription" Brush="CenterAlignedMediumFont"/>
 					  <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginLeft="30" MarginTop="60" Text="You ask the local notables for investment opportunities." Brush="CenterAlignedMediumFont"/>
                   </Children>
                 </Widget>
 				
 				<!--Buy Button-->
-				<Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="271" SuggestedHeight="90" VerticalAlignment="Center" MarginTop="600" MarginLeft="50">
+				<Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="271" SuggestedHeight="90" VerticalAlignment="Center" MarginTop="520" MarginLeft="150">
 					<Children>
-						<TextWidget Brush="MediumAlignedSmallFont" Text="Buy for 1000" HorizontalAlignment="Center"/>
-						<Widget WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedHeight="30" SuggestedWidth="30" Sprite="Icons\Coin@2x" MarginLeft="180" MarginTop="0" PositionYOffset="-15" HorizontalAlignment="Center"/>
+						<!--Buy Description-->
+						<Widget DoNotPassEventsToChildren="true" WidthSizePolicy = "StretchToParent" HeightSizePolicy = "CoverChildren" VerticalAlignment="Bottom" MarginBottom="-15">
+							<Children>
+								<ListPanel DoNotPassEventsToChildren="true" WidthSizePolicy = "CoverChildren" HeightSizePolicy = "CoverChildren" HorizontalAlignment="Center">
+									<Children>
+
+										<TextWidget WidthSizePolicy = "CoverChildren" HeightSizePolicy = "CoverChildren" Text="@BuyDescription"  Brush.FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Bottom" PositionYOffset="3" Brush.TextVerticalAlignment="Center" />
+										<!--Coin Icon-->
+										<Widget WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedHeight="30" SuggestedWidth="30" Sprite="Icons\Coin@2x" PositionYOffset="2" HorizontalAlignment="Center"/>
+										<!--Total Wealth Text-->
+									</Children>
+								</ListPanel>
+							</Children>
+						</Widget>   
 						<Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent">
 							<Children>
-								<ButtonWidget Command.Click="BuyAcre" DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" VerticalAlignment="Center" Brush="Popup.Cancel.Button" UpdateChildrenStates="true">
+								<ButtonWidget Command.Click="BuyAcre" DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" VerticalAlignment="Center" Brush="Popup.Done.Button" UpdateChildrenStates="true">
 									<Children>
 										<TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Button.Text" Text="Buy" />
 
@@ -116,16 +128,29 @@
 					</Children>
 				</Widget>
 
-				<!--Buy acre Command.Click="SellAcre"  Text="@SellDescription"-->
-				  <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="271" SuggestedHeight="90" VerticalAlignment="Center" HorizontalAlignment="Left" MarginTop="600" MarginLeft="370">
+				<!--Sell acre "-->
+				  <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="271" SuggestedHeight="90" VerticalAlignment="Center" HorizontalAlignment="Left" MarginTop="520" MarginLeft="485">
 					  <Children>
-						  <TextWidget Brush="MediumAlignedSmallFont" Text="Buy for 1000" HorizontalAlignment="Center"/>
-						  <Widget WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedHeight="30" SuggestedWidth="30" Sprite="Icons\Coin@2x" MarginLeft="180" MarginTop="0" PositionYOffset="-15" HorizontalAlignment="Center"/>
+						<!--Buy Description-->
+						<Widget DoNotPassEventsToChildren="true" WidthSizePolicy = "StretchToParent" HeightSizePolicy = "CoverChildren" VerticalAlignment="Bottom" MarginBottom="-15">
+							<Children>
+								<ListPanel DoNotPassEventsToChildren="true" WidthSizePolicy = "CoverChildren" HeightSizePolicy = "CoverChildren" HorizontalAlignment="Center">
+									<Children>
+
+										<TextWidget WidthSizePolicy = "CoverChildren" HeightSizePolicy = "CoverChildren" Text="@SellDescription"  Brush.FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Bottom" PositionYOffset="3" Brush.TextVerticalAlignment="Center" />
+										<!--Coin Icon-->
+										<Widget WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedHeight="30" SuggestedWidth="30" Sprite="Icons\Coin@2x" PositionYOffset="2" HorizontalAlignment="Center"/>
+										<!--Total Wealth Text-->
+										
+									</Children>
+								</ListPanel>
+							</Children>
+						</Widget>               
 						  <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent">
 							  <Children>
-								  <ButtonWidget Command.Click="BuyAcre" DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" VerticalAlignment="Center" Brush="Popup.Cancel.Button" UpdateChildrenStates="true">
+								  <ButtonWidget Command.Click="SellAcre" DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" VerticalAlignment="Center" Brush="Popup.Cancel.Button" UpdateChildrenStates="true">
 									  <Children>
-										  <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Button.Text" Text="Buy" />
+										  <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Button.Text" Text="Sell" />
 
 									  </Children>
 								  </ButtonWidget>
