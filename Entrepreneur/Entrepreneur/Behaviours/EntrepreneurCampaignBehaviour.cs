@@ -25,10 +25,11 @@ namespace Entrepreneur.Behaviours
 {
     class EntrepreneurCampaignBehaviour : CampaignBehaviorBase
     {
-        Dictionary<string, AcreProperties> acrePropertiesMap = new Dictionary<string, AcreProperties>();
+        Dictionary<string, AcreProperties> acrePropertiesMap;
         public static readonly EntrepreneurCampaignBehaviour Instance = new EntrepreneurCampaignBehaviour();
         public override void RegisterEvents()
         {
+            acrePropertiesMap  = new Dictionary<string, AcreProperties>();
             CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
             CampaignEvents.RaidCompletedEvent.AddNonSerializedListener(this, new Action<BattleSideEnum, MapEvent>(this.OnRaidCompleted));
         }
