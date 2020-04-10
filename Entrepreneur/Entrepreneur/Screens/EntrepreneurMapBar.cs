@@ -10,7 +10,7 @@ using TaleWorlds.MountAndBlade.View.Missions;
 
 namespace Entrepreneur.Screens
 {
-    [OverrideView(typeof(MapBar))]
+    //[OverrideView(typeof(MapBar))]
     public class GauntletMapBar : MapView
     {
         private EntrepreneurMapBarGlobalLayer _gauntlerMapBarGlobalLayer;

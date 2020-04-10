@@ -242,7 +242,6 @@
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\mapbar_left_canvas_7slots.png" />
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\mapbar_left_frame_7slots.png" />
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\mapbar_left_frame_silhouette_7slots.png" />
-    <Content Include="Build\Entrepreneur\GUI\Prefabs\Map\MapBar.xml" />
     <Content Include="Build\Entrepreneur\GUI\Prefabs\VillagePropertyScreen.xml" />
     <Content Include="Build\Entrepreneur\SubModule.xml" />
     <Content Include="Harmony\0Harmony.dll" />
