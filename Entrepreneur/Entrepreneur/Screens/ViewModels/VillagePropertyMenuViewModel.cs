@@ -10,6 +10,8 @@ using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
+
 namespace Entrepreneur.Screens.ViewModels
 {
     class VillagePropertyMenuViewModel : ViewModel
@@ -117,6 +119,16 @@ namespace Entrepreneur.Screens.ViewModels
 			get
 			{
 				return Hero.MainHero.Gold;
+			}
+		}
+
+		[DataSourceProperty]
+		public String AvailableAcres
+		{
+			get
+			{
+				int availableAcres = this._acreProperties.totalAcres - this._acreProperties.takenAcres + this._acreProperties.playerAcres;
+				return availableAcres.ToString();
 			}
 		}
 

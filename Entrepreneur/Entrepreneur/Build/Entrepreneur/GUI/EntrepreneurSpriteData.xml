@@ -26,6 +26,24 @@
 			<SheetY>0</SheetY>
 			<CategoryName>entrepreneur_icons</CategoryName>
 		</SpritePart>
+		<SpritePart>
+			<SheetID>1</SheetID>
+			<Name>Entrepreneur.EmptyField</Name>
+			<Width>282</Width>
+			<Height>578</Height>
+			<SheetX>0</SheetX>
+			<SheetY>192</SheetY>
+			<CategoryName>entrepreneur_icons</CategoryName>
+		</SpritePart>
+		<SpritePart>
+			<SheetID>1</SheetID>
+			<Name>Entrepreneur.WorkingField</Name>
+			<Width>282</Width>
+			<Height>578</Height>
+			<SheetX>283</SheetX>
+			<SheetY>192</SheetY>
+			<CategoryName>entrepreneur_icons</CategoryName>
+		</SpritePart>
 	</SpriteParts>
 	<Sprites>
 		<GenericSprite>
@@ -35,6 +53,14 @@
 		<GenericSprite>
 			<Name>MapbarLeftFrame</Name>
 			<SpritePartName>MapbarLeftFrame</SpritePartName>
+		</GenericSprite>
+		<GenericSprite>
+			<Name>Entrepreneur.EmptyField</Name>
+			<SpritePartName>Entrepreneur.EmptyField</SpritePartName>
+		</GenericSprite>
+		<GenericSprite>
+			<Name>Entrepreneur.WorkingField</Name>
+			<SpritePartName>Entrepreneur.WorkingField</SpritePartName>
 		</GenericSprite>
 	</Sprites>
 </SpriteData>
