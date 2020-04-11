@@ -1,4 +1,5 @@
 ﻿using Entrepreneur.Behaviours;
+using Entrepreneur.Models;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Entrepreneur.Patches
          ref ExplainedNumber goldChange,
          bool applyWithdrawals = false)
         {
-            goldChange.Add(EntrepreneurCampaignBehaviour.Instance.TotalPlayerRevenue, new TextObject("Revenue from acres"));
+            goldChange.Add(EntrepreneurModel.TotalPlayerRevenue, new TextObject("Revenue from acres"));
         }
     }
 }

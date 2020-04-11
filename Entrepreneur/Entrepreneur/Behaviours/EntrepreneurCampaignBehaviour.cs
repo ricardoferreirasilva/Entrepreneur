@@ -12,29 +12,34 @@ namespace Entrepreneur.Behaviours
 {
     class EntrepreneurCampaignBehaviour : CampaignBehaviorBase
     {
-        Dictionary<string, AcreProperties> acrePropertiesMap;
+        Dictionary<string, VillageData> _villageData;
+        public static EntrepreneurCampaignBehaviour MyInstance {
+            get {
+                return Campaign.Current.GetCampaignBehavior<EntrepreneurCampaignBehaviour>();
+            }
+        }
         public static readonly EntrepreneurCampaignBehaviour Instance = new EntrepreneurCampaignBehaviour();
         public override void RegisterEvents()
         {
-            acrePropertiesMap  = new Dictionary<string, AcreProperties>();
+            _villageData = new Dictionary<string, VillageData>();
             CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
             CampaignEvents.RaidCompletedEvent.AddNonSerializedListener(this, new Action<BattleSideEnum, MapEvent>(this.OnRaidCompleted));
         }
 
         public override void SyncData(IDataStore dataStore)
         {
-            dataStore.SyncData("acrePropertiesMap", ref acrePropertiesMap);
-            
+            dataStore.SyncData("acrePropertiesMap", ref _villageData);
+
         }
-        private void OnRaidCompleted(BattleSideEnum battle, MapEvent mapEvent){
+        private void OnRaidCompleted(BattleSideEnum battle, MapEvent mapEvent) {
             if (mapEvent.IsRaid)
             {
                 Settlement settlement = mapEvent.MapEventSettlement;
                 if (settlement.IsVillage)
                 {
-                    AcreProperties settlementAcreProperties;
-                    this.acrePropertiesMap.TryGetValue(settlement.StringId, out settlementAcreProperties);
-                    if(settlementAcreProperties.playerAcres > 0)
+                    VillageData settlementAcreProperties;
+                    this._villageData.TryGetValue(settlement.StringId, out settlementAcreProperties);
+                    if (settlementAcreProperties.playerAcres > 0)
                     {
                         Random rand = new Random();
                         if (rand.Next(1, 101) <= 25)
@@ -47,7 +52,7 @@ namespace Entrepreneur.Behaviours
                             InformationManager.DisplayMessage(new InformationMessage($"The village of {mapEvent.MapEventSettlement.Name} was raided but none of your property was destroyed."));
                         }
                     }
-  
+
                 }
             }
         }
@@ -63,15 +68,15 @@ namespace Entrepreneur.Behaviours
                 args.optionLeaveType = GameMenuOption.LeaveType.Trade;
                 return true;
             }, (MenuCallbackArgs args) => {
-                AcreProperties settlementAcreProperties;
-                this.acrePropertiesMap.TryGetValue(Settlement.CurrentSettlement.StringId, out settlementAcreProperties);
+                VillageData settlementAcreProperties;
+                this._villageData.TryGetValue(Settlement.CurrentSettlement.StringId, out settlementAcreProperties);
                 // Edit the View Model here? or pass data into VillagePropertyScreen and do it there?
                 ScreenManager.PushScreen(new VillagePropertyScreen(ref settlementAcreProperties));
             }, false, 4);
         }
         private void populateSettlementsWithProperty()
         {
-            if(acrePropertiesMap.Count == 0)
+            if (_villageData.Count == 0)
             {
                 Random random = new Random();
                 foreach (Settlement settlement in Settlement.All)
@@ -81,44 +86,17 @@ namespace Entrepreneur.Behaviours
                         int availableAcres = random.Next(10, 100);
                         int takenAcres = random.Next(5, availableAcres - (availableAcres / 2));
                         string settlementID = settlement.StringId;
-                        acrePropertiesMap.Add(settlementID, new AcreProperties(settlementID, availableAcres, takenAcres));
+                        _villageData.Add(settlementID, new VillageData(settlementID, availableAcres, takenAcres));
                     }
                 }
             }
         }
-        public int TotalPlayerRevenue
+        public Dictionary<string, VillageData> VillageData
         {
             get
             {
-                int totalIncome = 0;
-                foreach (Settlement settlement in Settlement.All)
-                {
-                    if (settlement.IsVillage)
-                    {
-                        AcreProperties settlementAcreProperties;
-                        this.acrePropertiesMap.TryGetValue(settlement.StringId, out settlementAcreProperties);
-                        totalIncome += settlementAcreProperties.playerAcres * settlementAcreProperties.ProductionValue;
-                    }
-                }
-                return totalIncome;
+                return this._villageData;
             }
-        }
-        private void generateRevenue()
-        {
-            Hero.MainHero.ChangeHeroGold(this.TotalPlayerRevenue);
-            InformationManager.DisplayMessage(new InformationMessage("Your land, properties and rents have generated " + this.TotalPlayerRevenue + " worth of income today."));
-        }
-        public int GetVillagePlayerAcres(string stringId)
-        {
-            AcreProperties settlementAcreProperties;
-            this.acrePropertiesMap.TryGetValue(stringId, out settlementAcreProperties);
-            return settlementAcreProperties.playerAcres;
-        }
-        public int GetVillagePlayerRevenue(string stringId)
-        {
-            AcreProperties settlementAcreProperties;
-            this.acrePropertiesMap.TryGetValue(stringId, out settlementAcreProperties);
-            return settlementAcreProperties.VillagePlayerRevenue;
         }
         public class MySaveDefiner : SaveableTypeDefiner
         {
@@ -128,12 +106,12 @@ namespace Entrepreneur.Behaviours
 
             protected override void DefineClassTypes()
             {
-                AddClassDefinition(typeof(AcreProperties), 52357712);
+                AddClassDefinition(typeof(VillageData), 52357712);
             }
 
             protected override void DefineContainerDefinitions()
             {
-                ConstructContainerDefinition(typeof(Dictionary<string, AcreProperties>));
+                ConstructContainerDefinition(typeof(Dictionary<string, VillageData>));
             }
         }
 

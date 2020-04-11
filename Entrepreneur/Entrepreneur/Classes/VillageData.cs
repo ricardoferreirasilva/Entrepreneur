@@ -17,7 +17,7 @@ using static TaleWorlds.CampaignSystem.SettlementComponent;
 
 namespace Entrepreneur.Classes
 {
-    public class AcreProperties
+    public class VillageData
     {
         [SaveableField(1)]
         public int totalAcres;
@@ -27,7 +27,7 @@ namespace Entrepreneur.Classes
         public int playerAcres = 0;
         [SaveableField(4)]
         public string settlementID;
-        public AcreProperties(string settlementID, int totalAcres, int takenAcres)
+        public VillageData(string settlementID, int totalAcres, int takenAcres)
         {
             this.settlementID = settlementID;
             this.totalAcres = totalAcres;

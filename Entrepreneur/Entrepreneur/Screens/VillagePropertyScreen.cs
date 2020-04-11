@@ -17,7 +17,7 @@ namespace Entrepreneur.Screens
 {
 	class VillagePropertyScreen : ScreenBase
     {
-		private AcreProperties _acreProperties;
+		private VillageData _acreProperties;
 
 		private VillagePropertyMenuViewModel _datasource;
 
@@ -27,7 +27,7 @@ namespace Entrepreneur.Screens
 
 		private bool _firstRender;
 
-		public VillagePropertyScreen(ref AcreProperties acreProperties)
+		public VillagePropertyScreen(ref VillageData acreProperties)
 		{
 			this._acreProperties = acreProperties;
 		}

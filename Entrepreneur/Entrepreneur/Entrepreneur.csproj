@@ -213,10 +213,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\AcreProperties.cs" />
+    <Compile Include="Classes\VillageData.cs" />
     <Compile Include="Behaviours\EntrepreneurCampaignBehaviour.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Models\EntrepreneurClanFinanceModel.cs" />
+    <Compile Include="Models\EntrepreneurModel.cs" />
     <Compile Include="Screens\EntrepreneurMapBar.cs" />
     <Compile Include="Screens\ViewModels\EntrepreneurMapNavigationVM.cs" />
     <Compile Include="Patches\ClanFinancialModelCalculateIncomePatch.cs" />

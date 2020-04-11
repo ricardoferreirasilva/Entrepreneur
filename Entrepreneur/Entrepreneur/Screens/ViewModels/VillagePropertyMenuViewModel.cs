@@ -1,4 +1,5 @@
 ﻿using Entrepreneur.Classes;
+using Entrepreneur.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,14 +17,14 @@ namespace Entrepreneur.Screens.ViewModels
 {
     class VillagePropertyMenuViewModel : ViewModel
     {
-		private AcreProperties _acreProperties;
+		private VillageData _villageData;
 
 		[DataSourceProperty]
 		public string VillageDescription
 		{
 			get
 			{
-				return "You arrive to the village of " + this._acreProperties.Settlement.Name + ".";
+				return "You arrive to the village of " + this._villageData.Settlement.Name + ".";
 			}
 		}
 
@@ -32,7 +33,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"There are {this._acreProperties.totalAcres} total acres of land. The villagers are farming {this._acreProperties.takenAcres} of them for their lord and {this._acreProperties.playerAcres} for you.";
+				return $"There are {this._villageData.totalAcres} total acres of land. The villagers are farming {this._villageData.takenAcres} of them for their lord and {this._villageData.playerAcres} for you.";
 			}
 		}
 
@@ -41,7 +42,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"There are currently {this._acreProperties.AvailableAcres} acres of land for sale.";
+				return $"There are currently {this._villageData.AvailableAcres} acres of land for sale.";
 			}
 		}
 
@@ -50,7 +51,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"One plot of land is worth {this._acreProperties.PricePerAcre}.";
+				return $"One plot of land is worth {this._villageData.PricePerAcre}.";
 			}
 		}
 		[DataSourceProperty]
@@ -58,7 +59,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"One plot of land produces {this._acreProperties.ProductionValue} per day.";
+				return $"One plot of land produces {this._villageData.ProductionValue} per day.";
 			}
 		}
 		[DataSourceProperty]
@@ -66,7 +67,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"Relation with village = {(int) Math.Round(this._acreProperties.RelationWithPlayer)}.";
+				return $"Relation with village = {(int) Math.Round(this._villageData.RelationWithPlayer)}.";
 			}
 		}
 		[DataSourceProperty]
@@ -74,7 +75,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				string SellMargin = $"Sell margin = -{(int)(this._acreProperties.AcreBuyPercentage * 100)}%";
+				string SellMargin = $"Sell margin = -{(int)(this._villageData.AcreBuyPercentage * 100)}%";
 				return SellMargin;
 			}
 		}
@@ -83,8 +84,8 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				string BuyMargin = $"Buy margin = {(int)(this._acreProperties.AcreSellPercentage * 100)}%";
-				if (this._acreProperties.AcreSellPercentage > 0) BuyMargin = $"Buy margin = +{(int)(this._acreProperties.AcreSellPercentage * 100)}%";
+				string BuyMargin = $"Buy margin = {(int)(this._villageData.AcreSellPercentage * 100)}%";
+				if (this._villageData.AcreSellPercentage > 0) BuyMargin = $"Buy margin = +{(int)(this._villageData.AcreSellPercentage * 100)}%";
 				return BuyMargin;
 			}
 		}
@@ -94,7 +95,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"{this._acreProperties.AcreSellPrice}";
+				return $"{this._villageData.AcreSellPrice}";
 			}
 		}
 
@@ -103,7 +104,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"{this._acreProperties.AcreBuyPrice}";
+				return $"{this._villageData.AcreBuyPrice}";
 			}
 		}
 
@@ -112,7 +113,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"Total daily player revenue here = {this._acreProperties.VillagePlayerRevenue}";
+				return $"Total daily player revenue here = {this._villageData.VillagePlayerRevenue}";
 			}
 		}
 
@@ -130,7 +131,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				int availableAcres = this._acreProperties.totalAcres - (this._acreProperties.takenAcres + this._acreProperties.playerAcres);
+				int availableAcres = this._villageData.totalAcres - (this._villageData.takenAcres + this._villageData.playerAcres);
 				return "Available plots: " + availableAcres.ToString();
 			}
 		}
@@ -140,14 +141,27 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				int ownedPlots = this._acreProperties.playerAcres;
+				int ownedPlots = this._villageData.playerAcres;
 				return "Owned plots: " + ownedPlots.ToString();
 			}
 		}
 
-		public VillagePropertyMenuViewModel(ref AcreProperties acreProperties)
+		public VillagePropertyMenuViewModel(ref VillageData acreProperties)
 		{
-			this._acreProperties = acreProperties;
+			this._villageData = acreProperties;
+		}
+
+		[DataSourceProperty]
+		public bool CanBuy
+		{
+			get
+			{
+				if (EntrepreneurModel.TotalPlayerPlots < EntrepreneurModel.MaximumPlots)
+				{
+					return true;
+				}
+				else return false;
+			}
 		}
 		private void ExitVillagePropertyMenu()
 		{
@@ -155,12 +169,12 @@ namespace Entrepreneur.Screens.ViewModels
 		}
 		private void BuyAcre()
 		{
-			int buyPrice = this._acreProperties.AcreSellPrice;
-			if (this._acreProperties.AvailableAcres > 0)
+			int buyPrice = this._villageData.AcreSellPrice;
+			if (this._villageData.AvailableAcres > 0)
 			{
 				if (Hero.MainHero.Gold >= buyPrice)
 				{
-					this._acreProperties.buyAcre();
+					this._villageData.buyAcre();
 					GiveGoldAction.ApplyForCharacterToSettlement(Hero.MainHero, Settlement.CurrentSettlement, buyPrice);
 					this.RefreshProperties();
 				}
@@ -170,10 +184,10 @@ namespace Entrepreneur.Screens.ViewModels
 		}
 		private void SellAcre()
 		{
-			int sellPrice = this._acreProperties.AcreBuyPrice;
-			if (this._acreProperties.playerAcres > 0)
+			int sellPrice = this._villageData.AcreBuyPrice;
+			if (this._villageData.playerAcres > 0)
 			{
-				this._acreProperties.sellAcre();
+				this._villageData.sellAcre();
 				GiveGoldAction.ApplyForSettlementToCharacter(Settlement.CurrentSettlement, Hero.MainHero, sellPrice);
 				this.RefreshProperties();
 			}
@@ -196,6 +210,7 @@ namespace Entrepreneur.Screens.ViewModels
 			OnPropertyChanged("PlayerGold");
 			OnPropertyChanged("AvailablePlots");
 			OnPropertyChanged("OwnedPlots");
+			OnPropertyChanged("CanBuy");
 		}
 	}
 }

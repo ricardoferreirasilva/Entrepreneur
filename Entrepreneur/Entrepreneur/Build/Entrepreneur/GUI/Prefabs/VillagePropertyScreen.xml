@@ -117,7 +117,7 @@
 						</Widget>   
 						<Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent">
 							<Children>
-								<ButtonWidget Command.Click="BuyAcre" DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" VerticalAlignment="Center" Brush="Popup.Done.Button" UpdateChildrenStates="true">
+								<ButtonWidget IsEnabled="@CanBuy" Command.Click="BuyAcre" DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" VerticalAlignment="Center" Brush="Popup.Done.Button" UpdateChildrenStates="true">
 									<Children>
 										<TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Button.Text" Text="Buy" />
 

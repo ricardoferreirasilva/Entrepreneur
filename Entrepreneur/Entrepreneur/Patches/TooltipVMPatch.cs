@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using Entrepreneur.Behaviours;
+using Entrepreneur.Models;
 
 namespace Entrepreneur.Patches
 {
@@ -61,8 +62,8 @@ namespace Entrepreneur.Patches
                             index = __instance.TooltipPropertyList.IndexOf(property);
                         }
                     }
-                    int playerAcres = EntrepreneurCampaignBehaviour.Instance.GetVillagePlayerAcres(party.Settlement.StringId);
-                    int playerRevenue = EntrepreneurCampaignBehaviour.Instance.GetVillagePlayerRevenue(party.Settlement.StringId);
+                    int playerAcres = EntrepreneurModel.GetVillagePlayerAcres(party.Settlement.StringId);
+                    int playerRevenue = EntrepreneurModel.GetVillagePlayerRevenue(party.Settlement.StringId);
                     if(playerAcres > 0)
                     {
                         __instance.TooltipPropertyList.Insert(index + 1, new TooltipProperty("Owned farm acres", playerAcres.ToString(), 0, false, TooltipProperty.TooltipPropertyFlags.None));
