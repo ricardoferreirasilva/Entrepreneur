@@ -1,25 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Diagnostics;
 using TaleWorlds.Core;
-using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
-using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.Overlay;
 using Entrepreneur.Classes;
 using TaleWorlds.SaveSystem;
 using TaleWorlds.Engine.Screens;
 using Entrepreneur.Screens;
-using TaleWorlds.MountAndBlade.ViewModelCollection.Multiplayer.HUDExtensions;
-using TaleWorlds.CampaignSystem.ViewModelCollection.GameMenu;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Map.Siege;
 
 namespace Entrepreneur.Behaviours
 {

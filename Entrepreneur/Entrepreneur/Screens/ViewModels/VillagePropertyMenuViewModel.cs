@@ -66,7 +66,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"Relation with village = {this._acreProperties.RelationWithPlayer}.";
+				return $"Relation with village = {(int) Math.Round(this._acreProperties.RelationWithPlayer)}.";
 			}
 		}
 		[DataSourceProperty]
@@ -74,7 +74,8 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"Buy margin = +{(int)(this._acreProperties.AcreBuyPercentage * 100)}%";
+				string SellMargin = $"Sell margin = -{(int)(this._acreProperties.AcreBuyPercentage * 100)}%";
+				return SellMargin;
 			}
 		}
 		[DataSourceProperty]
@@ -82,7 +83,9 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				return $"Sell margin = -{(int)(this._acreProperties.AcreSellPercentage * 100)}%";
+				string BuyMargin = $"Buy margin = {(int)(this._acreProperties.AcreSellPercentage * 100)}%";
+				if (this._acreProperties.AcreSellPercentage > 0) BuyMargin = $"Buy margin = +{(int)(this._acreProperties.AcreSellPercentage * 100)}%";
+				return BuyMargin;
 			}
 		}
 
@@ -127,7 +130,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				int availableAcres = this._acreProperties.totalAcres - this._acreProperties.takenAcres + this._acreProperties.playerAcres;
+				int availableAcres = this._acreProperties.totalAcres - (this._acreProperties.takenAcres + this._acreProperties.playerAcres);
 				return "Available plots: " + availableAcres.ToString();
 			}
 		}

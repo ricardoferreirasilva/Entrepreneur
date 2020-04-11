@@ -53,7 +53,7 @@ namespace Entrepreneur.Classes
                 double availability = ((double)(this.playerAcres + this.takenAcres) / (double)this.totalAcres);
 
 
-                int pricePerAcre = Convert.ToInt32(this.ProductionValue * 30 + availability * this.ProductionValue * 30);
+                int pricePerAcre = Convert.ToInt32(this.ProductionValue * 50 + availability * this.ProductionValue * 30);
 
                 return pricePerAcre;
             }
@@ -131,14 +131,16 @@ namespace Entrepreneur.Classes
                 double points = 25;
                 float relation = this.RelationWithPlayer;
                 Settlement settlement = this.getSelf();
-                if (relation > 20)
+                if (relation > 0 && relation <= 40)
                 {
-                    points -= 5;
+                    points -= (int) Math.Round(relation / (float) 2);
                 }
                 if (relation < 0)
                 {
-                    points += 5;
+                    points += (int) Math.Round(relation*-1);
                 }
+
+                
                 //If village is rebelling or starving, buy percentage increases by 10.
                 if (settlement.IsRebelling || settlement.IsStarving)
                 {
@@ -156,6 +158,7 @@ namespace Entrepreneur.Classes
                 {
                     points += 50;
                 }
+                
                 return (points / (double) 100);
             }
         }
@@ -167,14 +170,15 @@ namespace Entrepreneur.Classes
                 double points = 25;
                 float relation = this.RelationWithPlayer;
                 Settlement settlement = this.getSelf();
-                if(relation > 20)
+                if(relation > 0 && relation <= 40)
                 {
-                    points -= 5;
+                    points -= (int)Math.Round(relation / (float)2); ;
                 }
                 if (relation < 0)
                 {
-                    points += 5;
+                    points += (int)Math.Round(relation*-1);
                 }
+                
                 //If village is rebelling or starving, buy percentage increases by 10.
                 if (settlement.IsRebelling || settlement.IsStarving)
                 {
@@ -191,6 +195,7 @@ namespace Entrepreneur.Classes
                 {
                     points -= 20;
                 }
+                
                 return (points / (double)100);
             }
         }
