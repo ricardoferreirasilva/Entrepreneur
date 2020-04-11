@@ -215,6 +215,22 @@ namespace Entrepreneur.Classes
                 return Convert.ToInt32(this.PricePerAcre + ( (double) this.PricePerAcre * this.AcreSellPercentage));
             }
         }
+
+        public bool VillageWillNegotiate
+        {
+            get
+            {
+                IFaction villageFaction = this.Settlement.MapFaction;
+                IFaction heroFaction = Hero.MainHero.MapFaction;
+                bool atWarWithVillage = FactionManager.IsAtWarAgainstFaction(villageFaction, heroFaction);
+
+                if(this.RelationWithPlayer < -30 || atWarWithVillage)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
         public void buyAcre()
         {
             this.playerAcres++;

@@ -49,7 +49,7 @@ namespace Entrepreneur.Behaviours
                         }
                         else
                         {
-                            InformationManager.DisplayMessage(new InformationMessage($"The village of {mapEvent.MapEventSettlement.Name} was raided but none of your property was destroyed."));
+                            InformationManager.DisplayMessage(new InformationMessage($"The village of {mapEvent.MapEventSettlement.Name} was raided but none of your property were destroyed."));
                         }
                     }
 

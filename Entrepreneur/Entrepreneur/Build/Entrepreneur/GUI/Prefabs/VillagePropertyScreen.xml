@@ -94,7 +94,7 @@
                   <Widget WidthSizePolicy = "Fixed" HeightSiz2ePolicy = "Fixed" SuggestedWidth="850" SuggestedHeight="500" MarginTop="0" MarginLeft="0">
                   <Children>
                     <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginLeft="30" MarginTop="20" Text="@VillageDescription" Brush="CenterAlignedMediumFont"/>
-					  <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginLeft="30" MarginTop="60" Text="You ask the local notables for investment opportunities." Brush="CenterAlignedMediumFont"/>
+					  <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" MarginLeft="30" MarginTop="60" Text="@VillageDescriptionOne" Brush="CenterAlignedMediumFont"/>
                   </Children>
                 </Widget>
 				
@@ -148,7 +148,7 @@
 						</Widget>               
 						  <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent">
 							  <Children>
-								  <ButtonWidget Command.Click="SellAcre" DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" VerticalAlignment="Center" Brush="Popup.Cancel.Button" UpdateChildrenStates="true">
+								  <ButtonWidget IsEnabled="@CanSell" Command.Click="SellAcre" DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" VerticalAlignment="Center" Brush="Popup.Cancel.Button" UpdateChildrenStates="true">
 									  <Children>
 										  <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Button.Text" Text="Sell" />
 

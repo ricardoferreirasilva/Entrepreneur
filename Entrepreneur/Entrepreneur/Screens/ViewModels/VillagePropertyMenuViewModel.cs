@@ -29,11 +29,15 @@ namespace Entrepreneur.Screens.ViewModels
 		}
 
 		[DataSourceProperty]
-		public string AcreDescription1
+		public string VillageDescriptionOne
 		{
 			get
 			{
-				return $"There are {this._villageData.totalAcres} total acres of land. The villagers are farming {this._villageData.takenAcres} of them for their lord and {this._villageData.playerAcres} for you.";
+				if (this._villageData.VillageWillNegotiate)
+				{
+					return $"You ask the local notables for investment opportunities.";
+				}
+				else return $"The local notables are unwilling to negotiate with you.";
 			}
 		}
 
@@ -156,7 +160,24 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				if (EntrepreneurModel.TotalPlayerPlots < EntrepreneurModel.MaximumPlots)
+				if (this._villageData.VillageWillNegotiate)
+				{
+					if (EntrepreneurModel.TotalPlayerPlots < EntrepreneurModel.MaximumPlots)
+					{
+						return true;
+					}
+					else return false;
+				}
+				else return false;
+			}
+		}
+
+		[DataSourceProperty]
+		public bool CanSell
+		{
+			get
+			{
+				if (this._villageData.VillageWillNegotiate)
 				{
 					return true;
 				}
@@ -197,7 +218,7 @@ namespace Entrepreneur.Screens.ViewModels
 		private void RefreshProperties()
 		{
 			OnPropertyChanged("VillageDescription");
-			OnPropertyChanged("AcreDescription1");
+			OnPropertyChanged("VillageDescriptionOne");
 			OnPropertyChanged("AcreDescription2");
 			OnPropertyChanged("SellDescription");
 			OnPropertyChanged("BuyDescription");
@@ -211,6 +232,7 @@ namespace Entrepreneur.Screens.ViewModels
 			OnPropertyChanged("AvailablePlots");
 			OnPropertyChanged("OwnedPlots");
 			OnPropertyChanged("CanBuy");
+			OnPropertyChanged("CanSell");
 		}
 	}
 }
