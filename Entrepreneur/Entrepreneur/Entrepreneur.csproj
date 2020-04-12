@@ -237,7 +237,7 @@
   <ItemGroup>
     <Content Include="Build\Entrepreneur\GUI\Brushes\EntrepreneurBrushes.xml" />
     <Content Include="Build\Entrepreneur\GUI\Brushes\GameMenu.xml" />
-    <Content Include="Build\Entrepreneur\GUI\EntrepreneurSpriteData.xml" />
+    <Content Include="Build\Entrepreneur\GUI\entrepreneur-ui-1.xml" />
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\barren_landscape.png" />
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\farm_icon.png" />
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\mapbar_icon_coins2.png" />

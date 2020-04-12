@@ -16,7 +16,7 @@ namespace Entrepreneur.Resources
             var rc = UIResourceManager.ResourceContext;
             var sd = UIResourceManager.SpriteData;
 
-            var spriteData = new SpriteData("EntrepreneurSpriteData");
+            var spriteData = new SpriteData("entrepreneur-ui-1");
             spriteData.Load(rd);
             var texture = new TaleWorlds.TwoDimension.Texture((TaleWorlds.TwoDimension.ITexture)
                 new EngineTexture(
@@ -25,7 +25,7 @@ namespace Entrepreneur.Resources
                     )
                 );
 
-            sd.SpriteCategories.Add("entrepreneur_icons", spriteData.SpriteCategories["entrepreneur_icons"]);
+            sd.SpriteCategories.Add("entrepreneur-ui-1", spriteData.SpriteCategories["entrepreneur-ui-1"]);
 
             
             sd.SpritePartNames.Add("FinancesIcon", spriteData.SpritePartNames["FinancesIcon"]);
@@ -42,7 +42,7 @@ namespace Entrepreneur.Resources
 
             sd.SpritePartNames.Add("Entrepreneur.VillagePropertyIcon", spriteData.SpritePartNames["Entrepreneur.VillagePropertyIcon"]);
             sd.SpriteNames.Add("Entrepreneur.VillagePropertyIcon", new SpriteGeneric("Entrepreneur.VillagePropertyIcon", spriteData.SpritePartNames["Entrepreneur.VillagePropertyIcon"]));
-            var bettertimeicons = sd.SpriteCategories["entrepreneur_icons"];
+            var bettertimeicons = sd.SpriteCategories["entrepreneur-ui-1"];
             bettertimeicons.SpriteSheets.Add(texture);
             bettertimeicons.Load((ITwoDimensionResourceContext)rc, rd);
 
