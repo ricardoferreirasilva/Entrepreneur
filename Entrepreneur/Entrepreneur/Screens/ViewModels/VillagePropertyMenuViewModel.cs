@@ -163,7 +163,7 @@ namespace Entrepreneur.Screens.ViewModels
 		{
 			get
 			{
-				int ownedPlots = this._villageData.playerAcres;
+				int ownedPlots = EntrepreneurModel.TotalPlayerPlots;
 				int max = EntrepreneurModel.MaximumPlots;
 				return $"{ownedPlots}/{max} Plots"; ;
 			}
