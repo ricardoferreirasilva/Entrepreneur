@@ -12,11 +12,10 @@
 	  <!--Background-->
     <Widget WidthSizePolicy = "StretchToParent" HeightSizePolicy = "StretchToParent" Brush="Frame1Brush">
       <Children>
-
 		  <!--Main Panel-->
         <Widget DoNotAcceptEvents="true" WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedHeight="700" SuggestedWidth="1200" MarginTop="50" HorizontalAlignment="Center" Brush="Recruitment.Frame">
             <Children>
-					
+				<TextWidget Brush="MediumAlignedSmallFont" Text="@MaximumPlots" MarginTop="40" MarginRight="100" HorizontalAlignment="Right"/>
 				<!--Player Acres Widget-->
 			    <Widget HorizontalAlignment="Left" MarginTop="140" MarginLeft="510" MarginRight="0">
 					<Children>
@@ -110,7 +109,8 @@
 										<TextWidget WidthSizePolicy = "CoverChildren" HeightSizePolicy = "CoverChildren" Text="@BuyDescription"  Brush.FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Bottom" PositionYOffset="3" Brush.TextVerticalAlignment="Center" />
 										<!--Coin Icon-->
 										<Widget WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedHeight="30" SuggestedWidth="30" Sprite="Icons\Coin@2x" PositionYOffset="2" HorizontalAlignment="Center"/>
-										<!--Total Wealth Text-->
+										<TextWidget WidthSizePolicy = "CoverChildren" HeightSizePolicy = "CoverChildren" Text="5 Tools"  Brush.FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Bottom" PositionYOffset="3" Brush.TextVerticalAlignment="Center" />
+										<TextWidget WidthSizePolicy = "CoverChildren" HeightSizePolicy = "CoverChildren" Text="5 Hardwood"  Brush.FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Bottom" PositionYOffset="3" Brush.TextVerticalAlignment="Center" MarginLeft="10"/>
 									</Children>
 								</ListPanel>
 							</Children>
@@ -120,9 +120,10 @@
 								<ButtonWidget IsEnabled="@CanBuy" Command.Click="BuyAcre" DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" VerticalAlignment="Center" Brush="Popup.Done.Button" UpdateChildrenStates="true">
 									<Children>
 										<TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Button.Text" Text="Buy" />
-
+										<!--<HintWidget DataSource="{MyHint}" Command.HoverBegin="ExecuteBeginHint" Command.HoverEnd="ExecuteEndHint" WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed"/>-->
 									</Children>
 								</ButtonWidget>
+								
 							</Children>
 						</Widget>
 					</Children>
@@ -141,7 +142,7 @@
 										<!--Coin Icon-->
 										<Widget WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedHeight="30" SuggestedWidth="30" Sprite="Icons\Coin@2x" PositionYOffset="2" HorizontalAlignment="Center"/>
 										<!--Total Wealth Text-->
-										
+										<TextWidget WidthSizePolicy = "CoverChildren" HeightSizePolicy = "CoverChildren" Text="3 Tools"  Brush.FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Bottom" PositionYOffset="3" Brush.TextVerticalAlignment="Center" />
 									</Children>
 								</ListPanel>
 							</Children>

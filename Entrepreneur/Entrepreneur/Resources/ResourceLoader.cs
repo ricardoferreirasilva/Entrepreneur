@@ -40,6 +40,8 @@ namespace Entrepreneur.Resources
             sd.SpritePartNames.Add("Entrepreneur.WorkingField", spriteData.SpritePartNames["Entrepreneur.WorkingField"]);
             sd.SpriteNames.Add("Entrepreneur.WorkingField", new SpriteGeneric("Entrepreneur.WorkingField", spriteData.SpritePartNames["Entrepreneur.WorkingField"]));
 
+            sd.SpritePartNames.Add("Entrepreneur.VillagePropertyIcon", spriteData.SpritePartNames["Entrepreneur.VillagePropertyIcon"]);
+            sd.SpriteNames.Add("Entrepreneur.VillagePropertyIcon", new SpriteGeneric("Entrepreneur.VillagePropertyIcon", spriteData.SpritePartNames["Entrepreneur.VillagePropertyIcon"]));
             var bettertimeicons = sd.SpriteCategories["entrepreneur_icons"];
             bettertimeicons.SpriteSheets.Add(texture);
             bettertimeicons.Load((ITwoDimensionResourceContext)rc, rd);

@@ -4,7 +4,7 @@
 		<SpriteCategory>
 			<Name>entrepreneur_icons</Name>
 			<SpriteSheetCount>1</SpriteSheetCount>
-			<SpriteSheetSize ID="1" Width="678" Height="770" />
+			<SpriteSheetSize ID="1" Width="735" Height="770" />
 		</SpriteCategory>
 	</SpriteCategories>
 	<SpriteParts>
@@ -12,6 +12,15 @@
 			<SheetID>1</SheetID>
 			<Name>FinancesIcon</Name>
 			<Width>44</Width>
+			<Height>42</Height>
+			<SheetX>690</SheetX>
+			<SheetY>0</SheetY>
+			<CategoryName>entrepreneur_icons</CategoryName>
+		</SpritePart>
+		<SpritePart>
+			<SheetID>1</SheetID>
+			<Name>Entrepreneur.VillagePropertyIcon</Name>
+			<Width>56</Width>
 			<Height>42</Height>
 			<SheetX>633</SheetX>
 			<SheetY>0</SheetY>
@@ -61,6 +70,10 @@
 		<GenericSprite>
 			<Name>Entrepreneur.WorkingField</Name>
 			<SpritePartName>Entrepreneur.WorkingField</SpritePartName>
+		</GenericSprite>
+		<GenericSprite>
+			<Name>Entrepreneur.VillagePropertyIcon</Name>
+			<SpritePartName>Entrepreneur.VillagePropertyIcon</SpritePartName>
 		</GenericSprite>
 	</Sprites>
 </SpriteData>

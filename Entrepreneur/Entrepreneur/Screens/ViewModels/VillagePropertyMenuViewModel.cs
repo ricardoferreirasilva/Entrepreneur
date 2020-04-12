@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
+using TaleWorlds.Core.ViewModelCollection;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -129,7 +130,14 @@ namespace Entrepreneur.Screens.ViewModels
 				return Hero.MainHero.Gold;
 			}
 		}
-
+		[DataSourceProperty]
+		public HintViewModel MyHint
+		{
+			get
+			{
+				return new HintViewModel("This is a hint.", (string)null);
+			}
+		}
 		[DataSourceProperty]
 		public String AvailablePlots
 		{
@@ -147,6 +155,17 @@ namespace Entrepreneur.Screens.ViewModels
 			{
 				int ownedPlots = this._villageData.playerAcres;
 				return "Owned plots: " + ownedPlots.ToString();
+			}
+		}
+
+		[DataSourceProperty]
+		public String MaximumPlots
+		{
+			get
+			{
+				int ownedPlots = this._villageData.playerAcres;
+				int max = EntrepreneurModel.MaximumPlots;
+				return $"{ownedPlots}/{max} Plots"; ;
 			}
 		}
 
@@ -233,6 +252,8 @@ namespace Entrepreneur.Screens.ViewModels
 			OnPropertyChanged("OwnedPlots");
 			OnPropertyChanged("CanBuy");
 			OnPropertyChanged("CanSell");
+			OnPropertyChanged("MaximumPlots");
+
 		}
 	}
 }

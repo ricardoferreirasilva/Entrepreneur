@@ -218,6 +218,8 @@
     <Compile Include="Main.cs" />
     <Compile Include="Models\EntrepreneurClanFinanceModel.cs" />
     <Compile Include="Models\EntrepreneurModel.cs" />
+    <Compile Include="Patches\GameMenuItemVMPatch.cs" />
+    <Compile Include="Patches\GameMenuWidgetPatch.cs" />
     <Compile Include="Screens\EntrepreneurMapBar.cs" />
     <Compile Include="Screens\ViewModels\EntrepreneurMapNavigationVM.cs" />
     <Compile Include="Patches\ClanFinancialModelCalculateIncomePatch.cs" />
@@ -234,9 +236,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Build\Entrepreneur\GUI\Brushes\EntrepreneurBrushes.xml" />
+    <Content Include="Build\Entrepreneur\GUI\Brushes\GameMenu.xml" />
     <Content Include="Build\Entrepreneur\GUI\EntrepreneurSpriteData.xml" />
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\barren_landscape.png" />
-    <Content Include="Build\Entrepreneur\GUI\SpriteParts\entrepreneur-ui-1.txt" />
+    <Content Include="Build\Entrepreneur\GUI\SpriteParts\farm_icon.png" />
+    <Content Include="Build\Entrepreneur\GUI\SpriteParts\mapbar_icon_coins2.png" />
     <Content Include="Build\Entrepreneur\GUI\SpriteSheets\entrepreneur-ui-1.png" />
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\farmed_land.png" />
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\mapbar_icon_finances.png" />
@@ -244,6 +248,7 @@
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\mapbar_left_frame_7slots.png" />
     <Content Include="Build\Entrepreneur\GUI\SpriteParts\mapbar_left_frame_silhouette_7slots.png" />
     <Content Include="Build\Entrepreneur\GUI\Prefabs\VillagePropertyScreen.xml" />
+    <Content Include="Build\Entrepreneur\GUI\SpriteSheets\entrepreneur-ui-1.txt" />
     <Content Include="Build\Entrepreneur\SubModule.xml" />
     <Content Include="Harmony\0Harmony.dll" />
     <Content Include="Harmony\0Harmony.xml" />

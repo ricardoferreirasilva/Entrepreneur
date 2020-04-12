@@ -1,6 +1,8 @@
 barren_landscape = 0 192 282 578
+farm_icon = 633 0 56 42
 farmed_land = 283 192 282 578
-mapbar_icon_finances = 633 0 44 42
+mapbar_icon_coins2 = 633 43 50 40
+mapbar_icon_finances = 690 0 44 42
 mapbar_left_canvas_7slots = 0 136 575 55
 mapbar_left_frame_7slots = 0 0 632 77
 mapbar_left_frame_silhouette_7slots = 0 78 610 57
