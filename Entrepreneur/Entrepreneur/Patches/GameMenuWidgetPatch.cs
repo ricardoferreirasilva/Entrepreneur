@@ -16,7 +16,6 @@ namespace Entrepreneur.Patches
         {
             if(type == 50)
             {
-                Trace.WriteLine("LEAVE TYPE " + type);
                 __instance.LeaveTypeIcon.SetState("VillageProperty");
                 __instance.LeaveTypeIcon.IsVisible = true;
             }

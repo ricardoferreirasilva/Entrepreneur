@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 
 namespace Entrepreneur.Models
@@ -93,33 +94,50 @@ namespace Entrepreneur.Models
             }
             if (missingRequirements.Count == 0)
             {
-                Trace.WriteLine("You have everything.");
-                foreach (var item in itemsToRemove)
+                int buyPrice = villageData.AcreSellPrice;
+                if (villageData.AvailableAcres > 0)
                 {
-                    // Remove whole stack.
-                    Hero.MainHero.PartyBelongedTo.ItemRoster.Remove(item.Key);
+                    if (Hero.MainHero.Gold >= buyPrice)
+                    {
+                        villageData.buyAcre();
+                        foreach (var item in itemsToRemove)
+                        {
+                            // Remove whole stack.
+                            Hero.MainHero.PartyBelongedTo.ItemRoster.Remove(item.Key);
 
-                    // Add the difference.
-                    Hero.MainHero.PartyBelongedTo.ItemRoster.AddToCounts(item.Key.EquipmentElement.Item, item.Value);
+                            // Add the difference.
+                            Hero.MainHero.PartyBelongedTo.ItemRoster.AddToCounts(item.Key.EquipmentElement.Item, item.Value);
+                        }
+                        GiveGoldAction.ApplyForCharacterToSettlement(Hero.MainHero, Settlement.CurrentSettlement, buyPrice);
+                    }
+                    else InformationManager.DisplayMessage(new InformationMessage("You dont have enouph gold to buy this plot."));
                 }
+                else InformationManager.DisplayMessage(new InformationMessage("There are no plots acres to buy."));
             }
             else
             {
                 foreach (KeyValuePair<string, int> requirement in missingRequirements)
                 {
-                    Trace.WriteLine($"You are missing {requirement.Value} items of {requirement.Key}.");
+                    InformationManager.DisplayMessage(new InformationMessage(($"You are missing {requirement.Value} items of {requirement.Key}.")));
                 }
             }
         }
         public static void SellPlot(VillageData villageData)
         {
-            // Getting back our sweet materials.
-            var scrapItems = new List<(string, int)> {("Tools", 3)};
-            foreach (var scrap in scrapItems)
+            var scrapItems = new List<(string, int)> { ("Tools", 3) };
+            int sellPrice = villageData.AcreBuyPrice;
+            if (villageData.playerAcres > 0)
             {
-                ItemObject scrapItem = Items.FindFirst(item => item.Name.ToString().Equals(scrap.Item1));
-                Hero.MainHero.PartyBelongedTo.ItemRoster.AddToCounts(scrapItem, scrap.Item2);
+                villageData.sellAcre();
+                // Getting back our sweet materials.
+                foreach (var scrap in scrapItems)
+                {
+                    ItemObject scrapItem = Items.FindFirst(item => item.Name.ToString().Equals(scrap.Item1));
+                    Hero.MainHero.PartyBelongedTo.ItemRoster.AddToCounts(scrapItem, scrap.Item2);
+                }
+                GiveGoldAction.ApplyForSettlementToCharacter(Settlement.CurrentSettlement, Hero.MainHero, sellPrice);
             }
+            else InformationManager.DisplayMessage(new InformationMessage("You have no plots to sell."));
         }
     }
 }

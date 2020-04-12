@@ -209,29 +209,14 @@ namespace Entrepreneur.Screens.ViewModels
 		}
 		private void BuyAcre()
 		{
-			int buyPrice = this._villageData.AcreSellPrice;
-			if (this._villageData.AvailableAcres > 0)
-			{
-				if (Hero.MainHero.Gold >= buyPrice)
-				{
-					this._villageData.buyAcre();
-					GiveGoldAction.ApplyForCharacterToSettlement(Hero.MainHero, Settlement.CurrentSettlement, buyPrice);
-					this.RefreshProperties();
-				}
-				else InformationManager.DisplayMessage(new InformationMessage("You dont have enouph gold to buy this plot."));
-			}
-			else InformationManager.DisplayMessage(new InformationMessage("There are no plots acres to buy."));
+			EntrepreneurModel.BuyPlot(this._villageData);
+			this.RefreshProperties();
 		}
 		private void SellAcre()
 		{
-			int sellPrice = this._villageData.AcreBuyPrice;
-			if (this._villageData.playerAcres > 0)
-			{
-				this._villageData.sellAcre();
-				GiveGoldAction.ApplyForSettlementToCharacter(Settlement.CurrentSettlement, Hero.MainHero, sellPrice);
-				this.RefreshProperties();
-			}
-			else InformationManager.DisplayMessage(new InformationMessage("You have no plots to sell."));
+			EntrepreneurModel.SellPlot(this._villageData);
+			this.RefreshProperties();
+			
 		}
 
 		private void RefreshProperties()
