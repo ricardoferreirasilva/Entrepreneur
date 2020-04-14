@@ -74,17 +74,17 @@ namespace Entrepreneur.Models
             EntrepreneurCampaignBehaviour entrepreneur = Campaign.Current.GetCampaignBehavior<EntrepreneurCampaignBehaviour>();
 
             Dictionary<string, int> itemRequirements = new Dictionary<string, int>();
-            itemRequirements.Add("Tools", 5);
-            itemRequirements.Add("Hardwood", 5);
+            itemRequirements.Add("tools", 5);
+            itemRequirements.Add("hardwood", 5);
 
             Dictionary<string, int> missingRequirements = new Dictionary<string, int>();
-            missingRequirements.Add("Tools", 5);
-            missingRequirements.Add("Hardwood", 5);
+            missingRequirements.Add("tools", 5);
+            missingRequirements.Add("hardwood", 5);
 
             Dictionary<ItemRosterElement, int> itemsToRemove = new Dictionary<ItemRosterElement, int>();
             foreach (KeyValuePair<string, int> requirement in itemRequirements)
             {
-                IEnumerable<ItemRosterElement> items = Hero.MainHero.PartyBelongedTo.ItemRoster.AsQueryable().Where(item => item.Amount >= requirement.Value && item.EquipmentElement.Item.Name.ToString().Equals(requirement.Key));
+                IEnumerable<ItemRosterElement> items = Hero.MainHero.PartyBelongedTo.ItemRoster.AsQueryable().Where(item => item.Amount >= requirement.Value && item.EquipmentElement.Item.StringId.Equals(requirement.Key));
                 if (items.Count() != 0)
                 {
                     int currentAmount = items.First().Amount;
@@ -124,7 +124,7 @@ namespace Entrepreneur.Models
         }
         public static void SellPlot(VillageData villageData)
         {
-            var scrapItems = new List<(string, int)> { ("Tools", 3) };
+            var scrapItems = new List<(string, int)> { ("tools", 3) };
             int sellPrice = villageData.AcreBuyPrice;
             if (villageData.playerAcres > 0)
             {
@@ -132,7 +132,7 @@ namespace Entrepreneur.Models
                 // Getting back our sweet materials.
                 foreach (var scrap in scrapItems)
                 {
-                    ItemObject scrapItem = Items.FindFirst(item => item.Name.ToString().Equals(scrap.Item1));
+                    ItemObject scrapItem = Items.FindFirst(item => item.StringId.Equals(scrap.Item1));
                     Hero.MainHero.PartyBelongedTo.ItemRoster.AddToCounts(scrapItem, scrap.Item2);
                 }
                 GiveGoldAction.ApplyForSettlementToCharacter(Settlement.CurrentSettlement, Hero.MainHero, sellPrice);
